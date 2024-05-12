@@ -209,6 +209,8 @@ st.text(df.shape)
 
 st.subheader('9.파일로 저장')
 st.code("df.to_excel('QQQ.xlsx',index=False)")
+
+
 #=====================================================
 #=====================================================
 #=====================================================
@@ -218,6 +220,7 @@ st.code("df.to_excel('QQQ.xlsx',index=False)")
 #=====================================================
 #=====================================================
 #=====================================================
+
 csv_data = df.to_csv()
 # excel_data = BytesIO()
 # df.to_excel(excel_data)
@@ -231,39 +234,42 @@ st.download_button('CSV 파일 다운로드',csv_data,file_name='qqq_crawling.cs
 
 
 
-st.header(' ')
-st.subheader('크롬 드라이버 설치')
-image_file1 = "C:/Users/USER/Documents/image/image1.png"
-img1= Image.open(image_file1)
-st.image(img1,width=350)
+# st.header(' ')
+# st.subheader('크롬 드라이버 설치')
+# image_file1 = "https://github.com/skawogur1234567/forstreamlit/blob/main/image/image1.png"
+# response = requests.get(image_file1)
+# print(response.status_code)
+# # img1= Image.open(BytesIO(response.content))
+# # st.image(img1,width=350)
 
-image_file2 = "C:/Users/USER/Documents/image/image2.png"
-img2= Image.open(image_file2)
-st.image(img2,width=350)
+# image_file2 = "https://github.com/skawogur1234567/forstreamlit/blob/main/image/image1.png"
+# response = requests.get(image_file1)
+# img1= Image.open(BytesIO(response.content))
+# st.image(img1,width=350)
 
-st.write('확인하시면 버전 124.0.6367 버전임을 확인할 수 있습니다')
-st.write('https://googlechromelabs.github.io/chrome-for-testing/')
-st.write('이 링크에서')
+# st.write('확인하시면 버전 124.0.6367 버전임을 확인할 수 있습니다')
+# st.write('https://googlechromelabs.github.io/chrome-for-testing/')
+# st.write('이 링크에서')
 
-image_file3 = "C:/Users/USER/Documents/image/image3.png"
-img3= Image.open(image_file3)
-st.image(img3,width=350)
+# image_file3 = "C:/Users/USER/Documents/image/image3.png"
+# img3= Image.open(image_file3)
+# st.image(img3,width=350)
 
-st.write('''
-stable의 chromedriver win64의 링크를 복사해서 접속하면 설치가 완료 된다
-설치가 완료되었으면 압축을 풀면 된다
-경로가 생각보다 복잡해서
-저는 문서 파일에 저장해두었습니다
-''')
+# st.write('''
+# stable의 chromedriver win64의 링크를 복사해서 접속하면 설치가 완료 된다
+# 설치가 완료되었으면 압축을 풀면 된다
+# 경로가 생각보다 복잡해서
+# 저는 문서 파일에 저장해두었습니다
+# ''')
 
-image_file4 = "C:/Users/USER/Documents/image/image4.png"
-img4= Image.open(image_file4)
-st.image(img4,width=350)
-st.write('그 폴더 들어가시면 chromedriver.exe가 있다면 설치 완료입니다.')
+# image_file4 = "C:/Users/USER/Documents/image/image4.png"
+# img4= Image.open(image_file4)
+# st.image(img4,width=350)
+# st.write('그 폴더 들어가시면 chromedriver.exe가 있다면 설치 완료입니다.')
 
-image_file5 = "C:/Users/USER/Documents/image/image5.png"
-img5= Image.open(image_file5)
-st.image(img5,width=350)
+# image_file5 = "https://github.com/skawogur1234567/forstreamlit/blob/main/image/image5.png"
+# img5= Image.open(image_file5)
+# st.image(img5,width=350)
 
 
 
