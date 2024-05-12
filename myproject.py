@@ -138,15 +138,7 @@ with open('df_list(0).csv', 'wb') as f:
     f.write(response.content)
 df_list_0 = pd.read_csv('df_list(0).csv')
 
-#=====================================================
-#=====================================================
-#=====================================================
-#=====================================================
-#=====================================================
-#=====================================================
-#=====================================================
-#=====================================================
-#=====================================================
+
 
 st.code('df_list[0]')
 st.dataframe(df_list_0)
@@ -184,6 +176,15 @@ st.code('''page_html2 = driver.page_source
 df_list2 = pd.read_html(StringIO(page_html2))
 ''')
 
+#=====================================================
+#=====================================================
+#=====================================================
+#=====================================================
+#=====================================================
+#=====================================================
+#=====================================================
+#=====================================================
+#=====================================================
 
 st.subheader('7. 데이터 프레임 추출')
 st.markdown('''
@@ -194,11 +195,11 @@ st.markdown('''
 st.code('df_holdings2 = df_list2[1]')
 st.code('df_holdings2.head(3)')
 
-url3 = 'https://raw.githubusercontent.com/skawogur1234567/forstreamlit/main/df_holings2.xlsx'
+url3 = 'https://raw.githubusercontent.com/skawogur1234567/forstreamlit/main/csv/df_holdings2.csv'
 response3 = requests.get(url3)
-with open('df_holings2.xlsx', 'wb') as f:
+with open('df_holings2.csv', 'wb') as f:
     f.write(response3.content)
-df_holings2 = pd.read_excel('df_holings2.xlsx')
+df_holings2 = pd.read_csv('df_holings2.csv')
 st.dataframe(df_holings2.head(3))
 
 
