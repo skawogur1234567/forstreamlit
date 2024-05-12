@@ -1,4 +1,4 @@
-
+%%writefile C:/Users/USER/anaconda3/envs/llm/Scripts/myproject.py
 import streamlit as st
 import pandas as pd
 import requests
@@ -111,11 +111,11 @@ page_html = driver.page_source
 df_list = pd.read_html(StringIO(page_html))
 ''')
 st.code('df_list[1].head(3)')
-url = 'https://raw.githubusercontent.com/skawogur1234567/forstreamlit/main/df_holings1.xlsx'
+url = 'https://raw.githubusercontent.com/skawogur1234567/forstreamlit/main/csv/df_holings1.csv'
 response = requests.get(url)
-with open('df_holings1.xlsx', 'wb') as f:
+with open('df_holings1.csv', 'wb') as f:
     f.write(response.content)
-df_holings1 = pd.read_excel('df_holings1.xlsx')
+df_holings1 = pd.read_csv('df_holings1.csv')
 st.dataframe(df_holings1.head(3))
 
 
@@ -131,11 +131,23 @@ st.markdown('''
 st.code('df_holdings1 = df_list[1]')
 st.code('df_holdings1.head(3)')
 st.dataframe(df_holings1.head(3))
-url1 = 'https://raw.githubusercontent.com/skawogur1234567/forstreamlit/main/df_list[0].xlsx'
+
+url1 = 'https://raw.githubusercontent.com/skawogur1234567/forstreamlit/main/csv/df_list(0).csv'
 response = requests.get(url1)
-with open('df_list[0].xlsx', 'wb') as f:
+with open('df_list(0).csv', 'wb') as f:
     f.write(response.content)
-df_list_0 = pd.read_excel('df_list[0].xlsx')
+df_list_0 = pd.read_csv('df_list(0).csv')
+
+#=====================================================
+#=====================================================
+#=====================================================
+#=====================================================
+#=====================================================
+#=====================================================
+#=====================================================
+#=====================================================
+#=====================================================
+
 st.code('df_list[0]')
 st.dataframe(df_list_0)
 st.code('''
