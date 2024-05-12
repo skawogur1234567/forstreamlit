@@ -1,4 +1,4 @@
-%%writefile C:/Users/USER/anaconda3/envs/llm/Scripts/myproject.py
+
 import streamlit as st
 import pandas as pd
 import requests
