@@ -147,7 +147,7 @@ date = df_list[0]["Last Price"].iloc[1].replace("As of close\xa0", "")
 last_price = float(df_list[0]["Last Price"].iloc[0].replace("$", ""))
 ''')
 st.code('last_price')
-st.markdown(442.06)
+st.markdown("442.06")
 st.code('date')
 st.markdown("'05/10/2024'")
 
@@ -211,15 +211,15 @@ st.subheader('9.파일로 저장')
 st.code("df.to_excel('QQQ.xlsx',index=False)")
 
 
-#=====================================================
-#=====================================================
-#=====================================================
-#=====================================================
-#=====================================================
-#=====================================================
-#=====================================================
-#=====================================================
-#=====================================================
+# #=====================================================
+# #=====================================================
+# #=====================================================
+# #=====================================================
+# #=====================================================
+# #=====================================================
+# #=====================================================
+# #=====================================================
+# #=====================================================
 
 csv_data = df.to_csv()
 # excel_data = BytesIO()
@@ -230,6 +230,103 @@ csv_data = df.to_csv()
 
 st.subheader('CSV 파일로 다운로드')
 st.download_button('CSV 파일 다운로드',csv_data,file_name='qqq_crawling.csv')
+
+
+st.subheader('10.df 정제')
+st.markdown('1. 티커가 -- 인거 확인')
+st.code("df[df['Symbol']=='--']")
+df[df['Symbol']=='--']
+st.dataframe(df[df['Symbol']=='--'])
+st.markdown('2. Description이 Coca-Cola Europacific Partners PLC인거는 CCEP로 Symbol 변경 ')
+st.code("df.loc[df['Description']=='Coca-Cola Europacific Partners PLC','Symbol']='CCEP'")
+df.loc[df['Description']=='Coca-Cola Europacific Partners PLC','Symbol']='CCEP'
+st.dataframe(df[df['Symbol']=='CCEP'])
+st.markdown('3. Description이 cash는 제거')
+st.code("df = df[df['Symbol']!='--']")
+df = df[df['Symbol']!='--']
+st.dataframe(df.head(3))
+st.markdown('4. df의 개수 확인')
+st.code("df.shape")
+st.markdown(df.shape)
+
+
+st.subheader("11. FINVIZ.COM에서 리스트들 가져오기")
+import threading
+import os
+import time
+st.write('1. 패키지 불러오기')
+st.code('''
+import threading
+import os
+import time
+''')
+st.markdown("2.finviz_crawling이라는 함수 생성")
+st.code('''
+def finviz_crawling(symbols):
+    # 파라미터로 넣어주는 symbols의 타입은 리스트 형태여야 합니다
+    
+    # 1. 링크로부터 연결되었는지 확인
+    headers = {'User-agent': 'Mozila/2.0'}
+    result = pd.DataFrame()
+    
+    for symbol in symbols:
+        url = f'https://finviz.com/quote.ashx?t={symbol}&p=d'
+        response = requests.get(url, headers=headers)
+        
+        # 해당 티커가 finviz.com에 없으면 다음 티커로 넘어가게 만들었습니다.
+        if response.status_code != 200:
+            continue
+            
+        # 2. 표 가져오기
+        df = pd.read_html(StringIO(response.text))[6]
+        
+        # 3. 데이터 가공
+        data = [df.iloc[:, i:i+2].rename(columns={df.columns[i]: 0, df.columns[i + 1]: 1}) 
+                      for i in range(0, len(df.columns), 2)]
+        data1 = pd.concat(data, axis=0).transpose()
+        data1.columns = data1.iloc[0]
+        data1 = data1.iloc[1:].reset_index(drop=True)
+        data1['Ticker'] = symbol
+        data1.reset_index(drop=True, inplace=True)
+        result = pd.concat([result, data1], ignore_index=True)
+        
+        time.sleep(1)
+        
+    return result
+''')
+st.markdown('3. 불러올 티커 리스트 설정')
+st.write("불러올 티커 리스트는 df의 'Symbol'컬럼에 있습니다")
+st.code('''
+ticker_list = df['Symbol']
+len(ticker_list)
+''')
+ticker_list = df['Symbol']
+len(ticker_list)
+st.write('101')
+
+st.markdown('4. final에 finviz_crawling을 통해 df의 Symbol컬럼에 있는 값들 가져오기')
+st.write('이거 원래 한 2~3분 시간 걸립니다')
+url4 = 'https://raw.githubusercontent.com/skawogur1234567/forstreamlit/main/csv/merge_test.csv'
+response4 = requests.get(url4)
+with open('merge_test.csv', 'wb') as f:
+    f.write(response4.content)
+merge_test = pd.read_csv('merge_test.csv',header=0)
+
+st.code('''
+final = finviz_crawling(ticker_list)
+print(final.shape)
+final.head(3)
+''')
+st.write('101,79')
+st.dataframe(merge_test.head(3))
+csv_data1 = merge_test.to_csv()
+st.subheader('CSV 파일로 다운로드')
+st.download_button('CSV 파일 다운로드',csv_data1,file_name='qqq_finviz.csv')
+
+
+
+
+
 
 
 st.subheader('아나콘다 설치')
