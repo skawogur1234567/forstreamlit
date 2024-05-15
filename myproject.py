@@ -266,7 +266,7 @@ def finviz_crawling(symbols):
     # 파라미터로 넣어주는 symbols의 타입은 리스트 형태여야 합니다
     
     # 1. 링크로부터 연결되었는지 확인
-    headers = {'User-agent': 'Mozila/5.0'}
+    headers = {'User-agent': 'Mozila/2.0'}
     result = pd.DataFrame()
     
     for symbol in symbols:
